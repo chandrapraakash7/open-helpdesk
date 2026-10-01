@@ -3,6 +3,7 @@
 #   web     : standalone Next.js (slim image, server traced over the monorepo)
 #   worker  : BullMQ jobs (tsx over the sources, as in development)
 #   migrate : one-shot — Drizzle migrations + RLS (+ demo workspace if SEED_DEMO=true)
+#             (+ your first workspace from .env if OWNER_EMAIL is set)
 # Build context: the repository root (see docker/docker-compose.prod.yml).
 
 FROM node:22-alpine AS build
@@ -31,6 +32,8 @@ FROM build AS worker
 ENV NODE_ENV=production
 CMD ["pnpm", "--filter", "@openhelpdesk/worker", "start"]
 
-# ---------- migrate: migrations + RLS (+ demo seed) ----------
+# ---------- migrate: migrations + RLS (+ demo seed, + first workspace) ----------
+# The first-workspace step only ever creates: once the workspace exists, later
+# starts leave it alone (packages/auth/src/setup-workspace.ts).
 FROM build AS migrate
-CMD ["sh", "-c", "pnpm --filter @openhelpdesk/db db:migrate && pnpm --filter @openhelpdesk/db db:rls && if [ \"$SEED_DEMO\" = \"true\" ]; then pnpm db:seed && pnpm db:seed:auth; fi"]
+CMD ["sh", "-c", "pnpm --filter @openhelpdesk/db db:migrate && pnpm --filter @openhelpdesk/db db:rls && if [ \"$SEED_DEMO\" = \"true\" ]; then pnpm db:seed && pnpm db:seed:auth; fi && if [ -n \"$OWNER_EMAIL\" ]; then pnpm workspace:setup; fi"]

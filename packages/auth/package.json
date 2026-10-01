@@ -9,7 +9,8 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "seed": "tsx src/seed.ts"
+    "seed": "tsx src/seed.ts",
+    "setup:workspace": "tsx src/setup-workspace.ts"
   },
   "dependencies": {
     "@openhelpdesk/db": "workspace:*",

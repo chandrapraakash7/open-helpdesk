@@ -214,6 +214,11 @@ RustFS for S3 storage) starts with a demo workspace: `marie.dupont@acme.example`
 `demo-openhelpdesk`. Set `SEED_DEMO=false` once your own agents exist. The
 diagnostics card in **Settings → General** tells you what is left to configure.
 
+To start with your own workspace instead of the demo, set `SEED_DEMO=false`,
+set `DEFAULT_TENANT_SLUG` to its short name, and fill in the `WORKSPACE_*` and
+`OWNER_*` variables described in `.env.example`. The first start creates the
+workspace and you as its owner; later starts leave it alone.
+
 ## Development
 
 ```bash

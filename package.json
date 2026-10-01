@@ -17,6 +17,7 @@
     "db:seed": "pnpm --filter @openhelpdesk/db db:seed",
     "db:relocalize": "pnpm --filter @openhelpdesk/db db:relocalize",
     "db:seed:auth": "pnpm --filter @openhelpdesk/auth seed",
+    "workspace:setup": "pnpm --filter @openhelpdesk/auth setup:workspace",
     "test": "vitest run --project unit --coverage",
     "test:db": "vitest run --project db",
     "test:watch": "vitest --project unit",

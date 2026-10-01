@@ -7,6 +7,8 @@
 # With SEED_DEMO=true (the .env.example default), the instance starts with the
 # Acme demo workspace — login marie.dupont@acme.example / demo-openhelpdesk,
 # to be replaced by your own agents from the first session on.
+# With SEED_DEMO=false and the OWNER_* variables filled in, it starts with your
+# own workspace instead, created once from .env (see .env.example).
 #
 # The internal hosts (postgres, redis, storage) are pinned here and take
 # precedence over .env, written for development on the host machine's ports.

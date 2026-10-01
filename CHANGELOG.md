@@ -8,6 +8,14 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- **A first workspace without the demo.** A self-hosted instance started with
+  `SEED_DEMO=false` had no workspace and nobody to sign in as: the only code
+  that created one was the Acme seed. The `WORKSPACE_*` and `OWNER_*` variables
+  of `.env` now describe your own, and the migrate container creates it with
+  its owner on the first start (`pnpm workspace:setup` by hand). It only ever
+  creates — later starts leave the workspace alone — and a bad `.env` stops the
+  start with every problem listed, instead of an instance that answers
+  "workspace not found".
 - **Signing in on a device.** `POST /api/v1/auth/login` exchanges an agent's
   credentials for a token bound to one phone, revocable on its own and expiring
   after 90 days of silence. The workspace comes from the host the call lands on,
